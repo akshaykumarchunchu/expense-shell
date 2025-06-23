@@ -9,9 +9,9 @@ LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
 VALIDATE(){
     if [ $1 -ne 0 ]
     then 
-        echo -e "$R $2 is failure $N"
+        echo -e "$2..$R is failure $N"
     else
-        echo -e "$R $2 is success $N"
+        echo -e "$2..$G is success $N"
     fi
     }
 
