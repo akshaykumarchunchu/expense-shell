@@ -6,12 +6,17 @@ TIMESTAMP=$(date +%F-%H-%M-%S)
 SCRIPT_NAME=$(echo $0 | cut -d '.' -f1)
 LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
 
+R="\e[33m"
+G="\e[32m"
+Y="\e[31m"
+N="\e[0M"
+
 VALIDATE(){
     if [ $1 -ne 0 ]
     then 
-        echo "$2..is Failure"
+        echo "$2..$R is Failure $N"
     else
-        echo "$2..is Success"
+        echo "$2..$R is Success $N"
     fi
 }
 
