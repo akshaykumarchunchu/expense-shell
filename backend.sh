@@ -54,18 +54,14 @@ curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expen
 VALIDATE $? "Downloading backend in tmp"
 
 cd /app
-VALIDATE $? "change directory to app"
-
+rm -rf /app/*
 unzip /tmp/backend.zip
 VALIDATE $? "unzip backend file"
-
-cd /app
-rm -rf /app/*
-VALIDATE $? "change directory again to app"
 
 npm install
 VALIDATE $? "install npm"
 
+#check our repo and path 
 cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
 VALIADTE $? "Connecting to mysql from backend"
 
