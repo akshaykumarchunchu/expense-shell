@@ -5,6 +5,8 @@ userid=$(id -u)
 TIMESTAMP=$(date +%F-%H-%M-%S)
 SCRIPT_NAME=$(echo $0 | cut -d '.' -f1)
 LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
+echo "Enter your Password"
+read mysql_Password
 
 R="\e[31m"
 G="\e[32m"
@@ -65,6 +67,21 @@ VALIDATE $? "install npm"
 cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
 VALIDATE $? "Copied backend services"
 
+systemctl daemon-reload &>>$LOGFILE
+VALIDATE $? "daemon reload"
 
+systemctl start backend &>>$LOGFILE
+VALIDATE $? "start backend services"
 
+systemctl enable backend &>>$LOGFILE
+VALIDATE $? "enable backend"
+
+dnf install mysql -y &>>$LOGFILE
+VALIDATE $? "install mysql in backend"
+
+mysql -h db.akshaydaws-78s.online -uroot -p${mysql_Password} < /app/schema/backend.sql
+VALIDATE $? "Setting up password"
+
+systemctl restart backend &>>$LOGFILE
+VALIDATE $? "restart backend" 
 
