@@ -63,7 +63,8 @@ VALIDATE $? "install npm"
 
 #check our repo and path 
 cp /home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
-VALIADTE $? "Connecting to mysql from backend"
+VALIDATE $? "Copied backend services"
+
 
 
 
