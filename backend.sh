@@ -5,8 +5,8 @@ userid=$(id -u)
 TIMESTAMP=$(date +%F-%H-%M-%S)
 SCRIPT_NAME=$(echo $0 | cut -d '.' -f1)
 LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
-echo "Enter the Password"
-read mysql_root_Password
+# echo "Enter the Password"
+# read mysql_root_Password
 
 R="\e[31m"
 G="\e[32m"
@@ -79,11 +79,11 @@ VALIDATE $? "enable backend"
 dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "install mysql in backend"
 
-mysql -h db.akshaydaws-78s.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>LOGFILE
-VALIDATE $? "Schema Loading"
+# mysql -h db.akshaydaws-78s.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>LOGFILE
+# VALIDATE $? "Schema Loading"
 
-# mysql -h db.akshaydaws-78s.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOGFILE
-# VALIDATE $? "Schema loading"
+mysql -h db.akshaydaws-78s.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOGFILE
+VALIDATE $? "Schema loading"
 
 systemctl restart backend &>>$LOGFILE
 VALIDATE $? "Restarting Backend"
