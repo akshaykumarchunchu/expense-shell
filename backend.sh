@@ -80,8 +80,9 @@ dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "install mysql in backend"
 
 mysql -h db.akshaydaws-78s.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
-VALIDATE $? "Setting up password"
+VALIDATE $? "Schema loading"
 
 systemctl restart backend &>>$LOGFILE
-VALIDATE $? "restart backend" 
+VALIDATE $? "Restarting Backend"
+
 
