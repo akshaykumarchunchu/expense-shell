@@ -47,5 +47,21 @@ else
     echo -e "user expense already added..$Y SKIPPING $N"
 fi
 
+mkdir -p /app &>>$LOGFILE
+VALIDATE $? "Creating app directory"
 
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOGFILE
+VALIDATE $? "Downloading backend in tmp"
+
+cd /app
+VALIDATE $? "change directory to app"
+
+unzip /tmp/backend.zip
+VALIDATE $? "unzip backend file"
+
+cd /app
+VALIDATE $? "change directory again to app"
+
+npm install
+VALIDATE $? "install npm"
 
