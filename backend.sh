@@ -37,6 +37,15 @@ VALIDATE $? "enable nodejs newer version"
 dnf install nodejs -y &>>$LOGFILE
 VALIDATE $? "inatall nodejs"
 
-useradd expense &>>$LOGFILE
-VALIDATE $? "user add expense"
+id expense &>>$LOGFILE
+#VALIDATE $? "user add expense"
+if [ $? -ne 0 ]
+then 
+    useradd expense &>>$LOGFILE
+    VALIDATE $? "user add expense"
+else
+    echo "user expense already added..SKIPPING"
+fi
+
+
 
