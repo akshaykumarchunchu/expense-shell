@@ -5,6 +5,8 @@ userid=$(id -u)
 TIMESTAMP=$(date +%f-H%-%M-%S)
 SCRIPT_NAME=$(echo $0 | cut -d '.' -f1)
 LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
+echo "Enter a Password"
+read mysql_root_password
 
 R="\e[31m"
 G="\e[32m"
@@ -37,7 +39,16 @@ VALIDATE $? "Enable mysql"
 systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Start mysqld"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
-VALIDATE $? "Set Password"
+mysql -h db.daws78s.online -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
+if [ $? -ne 0 ]
+then 
+    mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$LOGFILE
+    VALIDATE $? "MySQL Root password Setup"
+else
+    echo -e "MySQL Root password is already setup...$Y SKIPPING $N"
+fi
+
+    
+
 
 
