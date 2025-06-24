@@ -6,7 +6,7 @@ TIMESTAMP=$(date +%F-%H-%M-%S)
 SCRIPT_NAME=$(echo $0 | cut -d '.' -f1)
 LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
 echo "Enter your Password"
-read mysql_Password
+read mysql_root_password
 
 R="\e[31m"
 G="\e[32m"
@@ -79,7 +79,7 @@ VALIDATE $? "enable backend"
 dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "install mysql in backend"
 
-mysql -h db.akshaydaws-78s.online -uroot -p${mysql_Password} < /app/schema/backend.sql
+mysql -h db.akshaydaws-78s.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
 VALIDATE $? "Setting up password"
 
 systemctl restart backend &>>$LOGFILE
