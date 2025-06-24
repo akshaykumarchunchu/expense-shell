@@ -9,14 +9,14 @@ LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
 R="\e[33m"
 G="\e[32m"
 Y="\e[31m"
-N="\e[0M"
+N="\e[0m"
 
 VALIDATE(){
     if [ $1 -ne 0 ]
     then 
         echo -e "$2..$R is Failure $N"
     else
-        echo -e "$2..$R is Success $N"
+        echo -e "$2..$G is Success $N"
     fi
 }
 
