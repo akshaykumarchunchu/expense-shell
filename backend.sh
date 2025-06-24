@@ -65,3 +65,7 @@ VALIDATE $? "change directory again to app"
 npm install
 VALIDATE $? "install npm"
 
+/home/ec2-user/expense-shell/backend.service /etc/systemd/system/backend.service
+VALIADTE $? "Connecting to mysql from backend"
+
+
