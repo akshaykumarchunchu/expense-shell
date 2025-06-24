@@ -27,7 +27,7 @@ dnf module disable nodejs -y &>>$LOGFILE
 VALIDATE $? "disable nodejs lower version"
 
 dnf module enable nodejs:20 -y &>>$LOGFILE
-VALIDAYE $? "enable nodejs newer version"
+VALIDATE $? "enable nodejs newer version"
 
 dnf install nodejs -y &>>$LOGFILE
 VALIDATE $? "inatall nodejs"
