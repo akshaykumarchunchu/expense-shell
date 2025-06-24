@@ -44,7 +44,7 @@ then
     useradd expense &>>$LOGFILE
     VALIDATE $? "user add expense"
 else
-    echo "user expense already added..SKIPPING"
+    echo "user expense already added..$Y SKIPPING $N"
 fi
 
 
