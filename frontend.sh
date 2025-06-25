@@ -14,9 +14,9 @@ N="\e[0m"
 VALIDATE(){
     if [ $1 -ne 0 ]
     then 
-        echo "$2..$R is failure"
+       echo -e "$2..$R is failure $N"
      else
-        echo "$2..$G is Success"
+        echo -e "$2..$G is Success $N"
     fi
 }
 
@@ -43,8 +43,8 @@ VALIDATE $? "removing default content"
 curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOGFILE
 VALIDATE $? "downloading the file"
 
-cd /usr/share/nginx/html
-unzip /tmp/frontend.zip
+cd /usr/share/nginx/html &>>$LOGFILE
+unzip /tmp/frontend.zip &>>$LOGFILE
 VALIDATE $? "unzip the frontend document"
 
 systemctl restart nginx &>>$LOGFILE
